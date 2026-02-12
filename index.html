@@ -91,7 +91,6 @@
         #yesBtn { background: var(--heart-color); color: white; box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3); }
         #noBtn { background: white; color: #888; position: absolute; }
 
-        /* Fitur Musik Floating */
         .music-control {
             position: fixed;
             bottom: 20px;
@@ -107,6 +106,20 @@
             cursor: pointer;
             z-index: 100;
             font-size: 20px;
+        }
+
+        /* Efek Hati Jatuh */
+        .heart-fall {
+            position: fixed;
+            top: -10px;
+            font-size: 20px;
+            animation: fall linear forwards;
+            z-index: 1;
+            opacity: 0.7;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
         }
 
         #typewriter { font-size: 1.1rem; min-height: 50px; line-height: 1.5; }
@@ -135,7 +148,7 @@
 
     <div class="music-control" onclick="toggleMusic()">🎵</div>
 
-  <audio id="bgMusic" loop>
+    <audio id="bgMusic" loop>
         <source src="lagu.mp3.mp3" type="audio/mpeg">
     </audio>
 
@@ -143,7 +156,6 @@
         const music = document.getElementById('bgMusic');
         let isPlaying = false;
 
-        // Fungsi Nyalakan/Matikan Musik
         function toggleMusic() {
             if (isPlaying) {
                 music.pause();
@@ -155,7 +167,7 @@
             isPlaying = !isPlaying;
         }
 
-        // Orbit Hati
+        // Orbit Hati Background
         const orbitContainer = document.getElementById('orbitContainer');
         const heartCount = 12; 
         const hearts = [];
@@ -200,20 +212,44 @@
             type();
         }
 
+        // Fungsi Tombol "Nggak" dengan Pesan Ngeselin
         function moveButton() {
             const btn = document.getElementById('noBtn');
+            const pesanNgeselin = [
+                "Eits, gak bisa!",
+                "Yakin mau nolak? 🥺",
+                "Harus pilih MAU pokoknya!",
+                "Coba lagi ya bocah...",
+                "Klik yang kiri aja ganteng/cantik..."
+            ];
+            
+            const randomPesan = pesanNgeselin[Math.floor(Math.random() * pesanNgeselin.length)];
+            console.log(randomPesan); // Muncul di console browser
+            
+            // Opsional: Jika ingin muncul popup tiap kali dia coba klik 'Nggak'
+            // alert(randomPesan); 
+
             btn.style.left = Math.random() * 80 + '%';
             btn.style.top = Math.random() * 80 + '%';
+        }
+
+        // Efek Hati Jatuh
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-fall');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 5000);
         }
 
         function celebrate() {
             document.querySelector('.main-card').innerHTML = "<h1>💖</h1><h2>YAY! I LOVE YOU MY GIRL CENGENGG!!!!!</h2><p>Momen ini bakal jadi favoritku selamanya.</p>";
             if(!isPlaying) toggleMusic();
+            // Jalankan hujan hati
+            setInterval(createHeart, 300);
         }
     </script>
 </body>
 </html>
-
-
-
-
