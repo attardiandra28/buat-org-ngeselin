@@ -251,7 +251,7 @@
 function moveButton() {
     const btn = document.getElementById('noBtn');
     
-    // Daftar pesan saat dia berusaha klik "Nggak"
+    // 1. Pesan peringatan (opsional, bisa kamu hapus alert-nya kalau dirasa mengganggu)
     const pesanNgeselin = [
         "Eits, gak bisa! 😜",
         "Yakin mau nolak? 🥺",
@@ -259,20 +259,27 @@ function moveButton() {
         "Gak boleh klik yang ini cill...",
         "Tombol ini lagi rusak, klik yang pink aja! ❤️"
     ];
-    
     const randomPesan = pesanNgeselin[Math.floor(Math.random() * pesanNgeselin.length)];
-    
-    // Tampilkan pesan di console atau ganti teks tombolnya sementara
-    btn.innerText = "Gak Bisa!"; 
-    setTimeout(() => { btn.innerText = "Nggak"; }, 1000);
+    console.log(randomPesan); // Muncul di inspect element saja biar gak ganggu
 
-    // Logika pindah posisi agar tidak keluar layar
-    const x = Math.random() * (window.innerWidth - btn.offsetWidth - 20);
-    const y = Math.random() * (window.innerHeight - btn.offsetHeight - 20);
+    // 2. Ubah posisi tombol ke 'fixed' agar bisa lari ke seluruh layar
+    btn.style.position = 'fixed';
+
+    // 3. Hitung posisi acak agar tetap di dalam batas layar HP/Laptop
+    // Kita beri jarak (padding) 50px agar tidak mepet ke pinggir layar
+    const padding = 50;
+    const maxX = window.innerWidth - btn.offsetWidth - padding;
+    const maxY = window.innerHeight - btn.offsetHeight - padding;
+
+    const randomX = Math.floor(Math.random() * (maxX - padding)) + padding;
+    const randomY = Math.floor(Math.random() * (maxY - padding)) + padding;
+
+    // 4. Terapkan posisi baru
+    btn.style.left = randomX + 'px';
+    btn.style.top = randomY + 'px';
     
-    btn.style.position = 'fixed'; // Pastikan posisinya fixed agar bebas lari
-    btn.style.left = x + 'px';
-    btn.style.top = y + 'px';
+    // 5. Tambahan: kasih efek transisi biar lari-nya mulus
+    btn.style.transition = "all 0.2s ease";
 }
 
         // --- FITUR BARU: GENERATOR PESAN ---
@@ -321,4 +328,5 @@ function moveButton() {
     </script>
 </body>
 </html>
+
 
