@@ -247,23 +247,33 @@
             type();
         }
 
-        // Tombol Nggak yang Ngeselin
-        function moveButton() {
-            const btn = document.getElementById('noBtn');
-            const pesanNgeselin = [
-                "Eits, gak bisa!",
-                "Yakin mau nolak? 🥺",
-                "Harus pilih MAU pokoknya!",
-                "Coba lagi ya bocah...",
-                "Klik yang mau aja cantik..."
-            ];
-            
-            const randomPesan = pesanNgeselin[Math.floor(Math.random() * pesanNgeselin.length)];
-            console.log(randomPesan); 
+     // Tombol Nggak yang Ngeselin & Pintar
+function moveButton() {
+    const btn = document.getElementById('noBtn');
+    
+    // Daftar pesan saat dia berusaha klik "Nggak"
+    const pesanNgeselin = [
+        "Eits, gak bisa! 😜",
+        "Yakin mau nolak? 🥺",
+        "Harus pilih MAU pokoknya!",
+        "Gak boleh klik yang ini cill...",
+        "Tombol ini lagi rusak, klik yang pink aja! ❤️"
+    ];
+    
+    const randomPesan = pesanNgeselin[Math.floor(Math.random() * pesanNgeselin.length)];
+    
+    // Tampilkan pesan di console atau ganti teks tombolnya sementara
+    btn.innerText = "Gak Bisa!"; 
+    setTimeout(() => { btn.innerText = "Nggak"; }, 1000);
 
-            btn.style.left = Math.random() * 80 + '%';
-            btn.style.top = Math.random() * 80 + '%';
-        }
+    // Logika pindah posisi agar tidak keluar layar
+    const x = Math.random() * (window.innerWidth - btn.offsetWidth - 20);
+    const y = Math.random() * (window.innerHeight - btn.offsetHeight - 20);
+    
+    btn.style.position = 'fixed'; // Pastikan posisinya fixed agar bebas lari
+    btn.style.left = x + 'px';
+    btn.style.top = y + 'px';
+}
 
         // --- FITUR BARU: GENERATOR PESAN ---
         const dailyMessages = [
@@ -311,3 +321,4 @@
     </script>
 </body>
 </html>
+
