@@ -102,6 +102,26 @@
         #yesBtn { background: var(--heart-color); color: white; box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3); }
         #noBtn { background: white; color: #888; position: absolute; }
 
+        /* Fitur Pesan Acak (Affirmation) */
+        #daily-message {
+            font-style: italic;
+            margin-top: 15px;
+            min-height: 40px;
+            color: #ff4d6d;
+            font-weight: bold;
+        }
+
+        .btn-small {
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
         /* Fitur Musik */
         .music-control {
             position: fixed;
@@ -239,17 +259,44 @@
             ];
             
             const randomPesan = pesanNgeselin[Math.floor(Math.random() * pesanNgeselin.length)];
-            alert(randomPesan); // Fitur pesan muncul saat kursor mendekat
+            console.log(randomPesan); 
 
             btn.style.left = Math.random() * 80 + '%';
             btn.style.top = Math.random() * 80 + '%';
         }
 
+        // --- FITUR BARU: GENERATOR PESAN ---
+        const dailyMessages = [
+            "forever you are my favorite woman ✨",
+            "Jangan lupa makan ya, aku nggak mau kamu sakit. ❤️",
+            "Kamu itu alasan aku semangat setiap hari!",
+            "I love you more than yesterday, but less than tomorrow.",
+            "Istirahat ya kalau capek, jangn sering sering begadangg gak baikk soalnya.",
+            "Cuma mau bilang, akuu ganteng kannnnnnnnnnnnnn????😍"
+        ];
+
+        function generateMessage() {
+            const msgEl = document.getElementById('daily-message');
+            const randomIndex = Math.floor(Math.random() * dailyMessages.length);
+            msgEl.style.opacity = 0;
+            setTimeout(() => {
+                msgEl.innerText = dailyMessages[randomIndex];
+                msgEl.style.opacity = 1;
+            }, 200);
+        }
+
         // Efek Rayakan
         function celebrate() {
-            document.querySelector('.main-card').innerHTML = "<h1>💖</h1><h2>YAY! I LOVE YOU MY GIRL CENGENGG!!!!!</h2><p>Momen ini bakal jadi favoritku selamanya.</p>";
+            document.querySelector('.main-card').innerHTML = `
+                <h1>💖</h1>
+                <h2>YAY! I LOVE YOU MY GIRL CENGENGG!!!!!</h2>
+                <p>Momen ini bakal jadi favoritku selamanya.</p>
+                <hr style="border: 0.5px solid #ff4d6d; opacity: 0.3;">
+                <p id="daily-message">Klik tombol di bawah kalau kamu kangen orang ganteng ini..</p>
+                <button class="btn-small" onclick="generateMessage()">Ambil Pesan Cinta</button>
+            `;
             if(!isPlaying) toggleMusic();
-            setInterval(createHeart, 300); // Mulai hujan hati
+            setInterval(createHeart, 300); 
         }
 
         function createHeart() {
