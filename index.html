@@ -249,38 +249,21 @@
 
      // Tombol Nggak yang Ngeselin & Pintar
 function moveButton() {
-    const btn = document.getElementById('noBtn');
-    
-    // 1. Pesan peringatan (opsional, bisa kamu hapus alert-nya kalau dirasa mengganggu)
-    const pesanNgeselin = [
-        "Eits, gak bisa! 😜",
-        "Yakin mau nolak? 🥺",
-        "Harus pilih MAU pokoknya!",
-        "Gak boleh klik yang ini cill...",
-        "Tombol ini lagi rusak, klik yang pink aja! ❤️"
-    ];
-    const randomPesan = pesanNgeselin[Math.floor(Math.random() * pesanNgeselin.length)];
-    console.log(randomPesan); // Muncul di inspect element saja biar gak ganggu
+            const btn = document.getElementById('noBtn');
+            const pesanNgeselin = [
+                "Eits, gak bisa!",
+                "Yakin mau nolak? 🥺",
+                "Harus pilih MAU pokoknya!",
+                "Coba lagi ya bocah...",
+                "Klik yang kiri aja cantik..."
+            ];
+            
+            const randomPesan = pesanNgeselin[Math.floor(Math.random() * pesanNgeselin.length)];
+            alert(randomPesan); // Fitur pesan muncul saat kursor mendekat
 
-    // 2. Ubah posisi tombol ke 'fixed' agar bisa lari ke seluruh layar
-    btn.style.position = 'fixed';
-
-    // 3. Hitung posisi acak agar tetap di dalam batas layar HP/Laptop
-    // Kita beri jarak (padding) 50px agar tidak mepet ke pinggir layar
-    const padding = 50;
-    const maxX = window.innerWidth - btn.offsetWidth - padding;
-    const maxY = window.innerHeight - btn.offsetHeight - padding;
-
-    const randomX = Math.floor(Math.random() * (maxX - padding)) + padding;
-    const randomY = Math.floor(Math.random() * (maxY - padding)) + padding;
-
-    // 4. Terapkan posisi baru
-    btn.style.left = randomX + 'px';
-    btn.style.top = randomY + 'px';
-    
-    // 5. Tambahan: kasih efek transisi biar lari-nya mulus
-    btn.style.transition = "all 0.2s ease";
-}
+            btn.style.left = Math.random() * 80 + '%';
+            btn.style.top = Math.random() * 80 + '%';
+        }
 
         // --- FITUR BARU: GENERATOR PESAN ---
         const dailyMessages = [
@@ -328,5 +311,6 @@ function moveButton() {
     </script>
 </body>
 </html>
+
 
 
